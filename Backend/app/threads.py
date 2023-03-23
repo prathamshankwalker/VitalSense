@@ -4,6 +4,22 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.core.cache import cache
 
+
+from twilio.rest import Client
+
+
+account_sid = settings.TWILIO_ACCOUNT_SID
+auth_token = settings.TWILIO_AUTH_TOKEN
+
+twilio_client = Client(account_sid, auth_token)
+
+message = twilio_client.messages.create(
+    from_ = 'whatsapp:+14155238886',
+    body = 'Hello',
+    to = 'whatsapp:+918007609672'
+)
+
+
 context = {}
 
 class send_forgot_link(threading.Thread):
@@ -28,13 +44,15 @@ class send_forgot_link(threading.Thread):
 
 
 class send_notification(threading.Thread):
-    def __init__(self, email, phone, message):
-        self.email = email
-        self.phone = phone
-        self.message = message
-        threading.Thread.__inti__(self)
+    def __init__(self, relatives_list):
+        self.relatives_list = relatives_list
+        threading.Thread.__init__(self)
     def run(self):
         try:
-            pass
+            twilio_client.messages.create(
+                from_ = 'whatsapp:+14752675057',
+                body = 'Hello',
+                to = f"whatsapp:+91{phone}"
+            )
         except Exception as e:
             print(e)

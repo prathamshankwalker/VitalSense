@@ -45,3 +45,18 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = FamilyMemberModel
         fields = "__all__"
+
+class ActivityPredictionModel(serializers.Serializer):
+    steps = serializers.FloatField(required = True)
+    calories = serializers.FloatField(required = True)
+    distance = serializers.FloatField(required = True)
+    heart_rate = serializers.FloatField(required = True)
+
+class ScrollInputSerializer(serializers.Serializer):
+    value = serializers.IntegerField(required = True)
+
+class UserPersonalDataSerializer(serializers.Serializer):
+    height = serializers.FloatField(required = True)
+    weight = serializers.FloatField(required = True)
+    dob = serializers.DateField(required = True)
+    gender = serializers.CharField(required = True)

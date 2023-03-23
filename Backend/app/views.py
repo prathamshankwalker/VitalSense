@@ -7,10 +7,12 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework import status
 from django.core.cache import cache
+from django.conf import settings
+from .suppliments import bada_data
 from .serializers import *
 from .threads import *
 from .models import *
-
+from .utils import *
 
 
 @api_view(["POST"])
@@ -161,9 +163,81 @@ class MemberRUD(RetrieveUpdateDestroyAPIView):
 
 
 @api_view(["POST"])
-@permission_classes(IsAuthenticated)
+@permission_classes([IsAuthenticated])
+def add_personal_data(request):
+    try:
+        user = UserModel.objects.get(email=request.user.email)
+        ser = UserPersonalDataSerializer(data = request.data)
+        if ser.is_valid():
+            user.height = ser.data["height"]
+            user.weight = ser.data["weight"]
+            user.dob = ser.data["dob"]
+            user.gender = ser.data["gender"]
+            user.save()
+            return Response({"message": "User Data Saved"}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def data_input(request):
     try:
-        pass
+        user = UserModel.objects.get(email=request.user.email)
+        ser = ActivityPredictionModel(data = request.data)
+        if ser.is_valid():
+            steps = ser.data["steps"]
+            calories = ser.data["calories"]
+            distance = ser.data["distance"]
+            heart_rate = ser.data["heart_rate"]
+            output = predict_activity(user.height, user.weight, steps, calories, distance, heart_rate)
+            return Response({"message": output}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def scroll_input(request):
+    try:
+        user = UserModel.objects.get(email=request.user.email)
+        ser = ScrollInputSerializer(data = request.data)
+        if ser.is_valid():
+            val = ser.data["value"]
+            if val not in range(1,6):
+                return Response({"message": "Invalid Range"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            output, text = ecg_classification(bada_data[val])
+            if output == 2:
+                thread_obj = send_notification(user.family_member.all())
+                thread_obj.start()
+            return Response({"message": text}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+# Hypoglycemia
+# 70-140
+# Hyperglycemia
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def scroll_input(request):
+    try:
+        user = UserModel.objects.get(email=request.user.email)
+        ser = ScrollInputSerializer(data = request.data)
+        if ser.is_valid():
+            val = ser.data["value"]
+            # if val not in range(0,):
+            #     return Response({"message": "Invalid Range"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            if val<70:
+                return Response({"message":"Low Blood Pressure, Hypoglycemia"}, status=status.HTTP_200_OK)
+            elif val>=70 and val<=140:
+                return Response({"message":"Normal Blood Pressure"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"message":"High Blood Pressure, Hyperglycemia"}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
