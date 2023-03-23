@@ -15,6 +15,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../state/actions/login";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { addUserProfile } from "../../state/actions/profile";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -23,14 +26,24 @@ export default function Signup() {
       name: "",
       password: "",
       email: "",
-    //   contacts: [{ name: "", phone: "", email: "", relation: "" }],
     },
   });
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated]);
 
   const formSubmitHandler = (values, e) => {
     e.preventDefault();
     console.log(values);
-    dispatch(signUpUser(values.email, values.password, values.name));
+    dispatch(
+      signUpUser(values.email, values.password, values.name)
+    );
   };
 
   return (
@@ -83,53 +96,6 @@ export default function Signup() {
         <Text mt="lg" my="sm">
           Add emergency contacts
         </Text>
-
-        {/* {form.values.contacts.map((index, item) => (
-          <>
-            <Text>Emergency Contact {index} </Text>
-            <TextInput
-              label="Name"
-              placeholder="John Doe"
-              required
-              {...form.getInputProps(`contacts.${index}.name`)}
-            />
-            <TextInput
-              label="Phone"
-              placeholder="+91 00000 00000"
-              type="tel"
-              required
-              {...form.getInputProps(`contacts.${index}.phone`)}
-            />
-            <TextInput
-              label="Email"
-              placeholder="x@gmail.com"
-              required
-              {...form.getInputProps(`contacts.${index}.email`)}
-            />
-            <TextInput
-              label="Relation"
-              placeholder="Father"
-              {...form.getInputProps(`contacts.${index}.relation`)}
-            />
-          </>
-        ))} */}
-
-        {/* <Center>
-          <Button
-            variant="outline"
-            size="xs"
-            onClick={() =>
-              form.insertListItem("contacts", {
-                name: "",
-                phone: "",
-                password: "",
-                relation: "",
-              })
-            }
-          >
-            Add contact
-          </Button>
-        </Center> */}
 
         <Button fullWidth mt="xl" type="submit">
           Sign in

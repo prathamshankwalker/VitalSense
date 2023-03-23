@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "@mantine/form";
 import { loginUser } from "../../state/actions/login";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const disptach = useDispatch();
   const form = useForm({
@@ -23,12 +24,20 @@ export default function Login() {
       password: "",
     },
   });
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated]);
 
   const formSubmitHandler = (values, e) => {
     console.log(values);
     e.preventDefault();
-    disptach(loginUser(values.email,values.password));
-  }
+    disptach(loginUser(values.email, Number(values.password)));
+  };
 
   return (
     <Container size="xs" my={40}>
@@ -48,14 +57,27 @@ export default function Login() {
         </Anchor>
       </Text>
 
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md" component="form" onSubmit={form.onSubmit((values, e) => formSubmitHandler(values, e))}>
-        <TextInput label="Email" placeholder="you@mantine.dev" required {...form.getInputProps('email')}/>
+      <Paper
+        withBorder
+        shadow="md"
+        p={30}
+        mt={30}
+        radius="md"
+        component="form"
+        onSubmit={form.onSubmit((values, e) => formSubmitHandler(values, e))}
+      >
+        <TextInput
+          label="Email"
+          placeholder="you@mantine.dev"
+          required
+          {...form.getInputProps("email")}
+        />
         <PasswordInput
           label="Password"
           placeholder="Your password"
           required
           mt="md"
-          {...form.getInputProps('password')}
+          {...form.getInputProps("password")}
         />
         <Button fullWidth mt="xl" type="submit">
           Log In

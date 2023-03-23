@@ -1,8 +1,12 @@
+import { Button, Container, Group } from "@mantine/core";
+
 const Profile = () => {
     return(
-        <>
-            hello
-        </>
+        <Container size="xl">
+            <Group>
+                <Button>Edit Profile</Button>
+            </Group>
+        </Container>
     )
 }
-export default Profile;
+export default Profile; 

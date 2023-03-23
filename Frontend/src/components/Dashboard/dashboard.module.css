@@ -1,0 +1,5 @@
+.currentCard {
+    background: linear-gradient(45deg, var(--mantine-color-violet-3), var(--mantine-color-indigo-4));
+    color: hsl(0, 0%, 0%);
+    max-width: 250px;
+}

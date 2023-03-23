@@ -1,14 +1,12 @@
 import axios from "axios";
-import "../../axios";
 
-// We use double arrow functions
 export const loginUser = (email, password) => async (dispatch) => {
   try {
     dispatch({
       type: "LoginRequestEmail",
     });
     const { data } = await axios.post(
-      "/api/login/",
+      "http://192.168.0.161:8000/api/login/",
       { email, password },
       {
         headers: {
@@ -49,7 +47,7 @@ export const signUpUser = (email, password, name) => async (dispatch) => {
       type: "RegisterRequest",
     });
     const { data } = await axios.post(
-      "/api/signup/",
+      "http://192.168.0.161:8000/api/signup/",
       { email, password, name },
       {
         headers: {

@@ -20,7 +20,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { logoutUser } from "../state/actions/login";
 
 const useStyles = createStyles((theme) => ({
@@ -71,7 +71,8 @@ export default function Navbar() {
   };
 
   return (
-    <Box pb={120} sx={{ background: theme.colors.dark[7] }}>
+    <>
+    <Box pb={30} sx={{ background: theme.colors.dark[7] }}>
       <Header height={60} px="md" sx={{ background: theme.colors.dark[7] }}>
         <Group position="apart" sx={{ height: "100%" }}>
           <Text>logo</Text>
@@ -135,5 +136,7 @@ export default function Navbar() {
         </ScrollArea>
       </Drawer>
     </Box>
+    <Outlet/>
+    </>
   );
 }

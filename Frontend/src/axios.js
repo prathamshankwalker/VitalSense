@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const productionUrl = "Add production url here"
-export const developmentUrl = "http://192.168.0.161:8000/"
+export const developmentUrl = "http://192.168.0.161:8000/api/login/"
 
 axios.defaults.baseURL = developmentUrl
 

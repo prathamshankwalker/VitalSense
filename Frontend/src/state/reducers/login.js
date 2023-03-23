@@ -11,6 +11,7 @@ export const authReducer = createReducer(initialState, {
   LoginSuccessEmail: (state, action) => {
     state.message = action.payload;
     state.loading = false;
+    state.isAuthenticated = true;
   },
   LoginFailureEmail: (state, action) => {
     state.error = action.payload;
@@ -31,16 +32,16 @@ export const authReducer = createReducer(initialState, {
     state.message = null;
   },
 
-  RegisterRequest: (state,action)=>{
-        state.loading = true;
-    },
-    RegisterSuccess: (state,action)=>{
-        state.message = action.payload;
-        state.loading = false
-        state.isAuthenticated = true
-    },
-    RegisterFailure: (state,action)=>{     
-          state.error = action.payload
-          state.loading = false
-    },
+  RegisterRequest: (state, action) => {
+    state.loading = true;
+  },
+  RegisterSuccess: (state, action) => {
+    state.message = action.payload;
+    state.loading = false;
+    state.isAuthenticated = true;
+  },
+  RegisterFailure: (state, action) => {
+    state.error = action.payload;
+    state.loading = false;
+  },
 });
