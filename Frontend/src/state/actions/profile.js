@@ -7,16 +7,18 @@ export const addUserProfile =
       dispatch({
         type: "ProfileRequest",
       });
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      console.log(token);
       const { data } = await axios.post(
         "api/add-personal-data/",
         { height, weight, dob, gender },
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
         }
       );
-
       dispatch({
         type: "ProfileSuccess",
         payload: data.message,

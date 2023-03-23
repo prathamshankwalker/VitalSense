@@ -12,9 +12,9 @@ import AddProfile from "./components/Profile/AddProfile";
 import AddEmergency from "./components/Profile/AddEmergency";
 
 function App() {
-  // const { loading, isAuthenticated, error } = useSelector(
-  //   (state) => state.auth
-  // );
+  const { isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
   // const { hasProfile } = useSelector((state) => state.profileAuth);
   // const { hasContacts } = useSelector((state) => state.addMember);  
 
@@ -25,8 +25,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/dashboard" element={isAuthenticated ? <Dashboard/>: <Login/>}/> */}
-        {/* <Route path="/addprofile" element={isAuthenticated ? <AddProfile /> : <Login/>} /> */}
-        {/* <Route path="/addemergency" element={(isAuthenticated && hasProfile) ? <AddEmergency /> : <Login/>}/> */}
+        <Route path="/addprofile" element={<AddProfile />} />
+        <Route path="/addemergency" element={<AddEmergency />}/>
         <Route element={<Navbar />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />

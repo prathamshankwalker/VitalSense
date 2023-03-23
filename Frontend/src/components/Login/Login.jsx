@@ -29,7 +29,7 @@ export default function Login() {
   
   useEffect(() => {
     if (isAuthenticated === true) {
-      navigate("/dashboard");
+      navigate("/addprofile");
     }
   }, [isAuthenticated]);
 

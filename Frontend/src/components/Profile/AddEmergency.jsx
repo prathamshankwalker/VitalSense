@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddEmergency = () => {
   const dispatch = useDispatch();
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -28,18 +29,19 @@ const AddEmergency = () => {
   const formSubmitHandler = (values, e) => {
     e.preventDefault();
     console.log(values);
-    // dispatch(
-    //   addEmergencyMember(
-    //     values.name,
-    //     values.phone,
-    //     values.email,
-    //     values.relation
-    //   )
-    // );
+    dispatch(
+      addEmergencyMember(
+        values.name,
+        values.phone,
+        values.email,
+        values.relation
+      )
+    );
   };
-  // const { hasContacts } = useSelector((state) => state.addMember);
-  // const navigate = useNavigate()
   
+  const { hasContacts } = useSelector((state) => state.member);
+  // const navigate = useNavigate()
+
   // useEffect(() => {
   //   navigate("/dashboard");
   // }, [hasContacts]);
@@ -62,7 +64,7 @@ const AddEmergency = () => {
           {...form.getInputProps(`name`)}
         />
         <TextInput
-          label="Name"
+          label="Email"
           placeholder="gmail@gmail.com"
           required
           {...form.getInputProps(`email`)}
