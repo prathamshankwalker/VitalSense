@@ -15,8 +15,10 @@ export const loginUser = (email, password) => async (dispatch) => {
       }
     );
     console.log(data);
+    W
     localStorage.setItem("user", JSON.stringify({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5OTQzMTY4LCJpYXQiOjE2Nzk1OTc1NjgsImp0aSI6Ijc0NDM2MzRlMjEwNTQ0OTNiMTE3MmQ3MDE0ZTQ2MDU2IiwidXNlcl9pZCI6Ijk5NWRiMWRmLTM4MWYtNGU0Ny04ZTQzLTMyNzAzMWM5NzY1OCJ9.en33hi5SbK1d3FaWR9hJAfOLRSl7SMANlbDi3rsclWM" }));
-    dispatch({
+    
+    Wdispatch({
       type: "LoginSuccessEmail",
       payload: data.message,
     });

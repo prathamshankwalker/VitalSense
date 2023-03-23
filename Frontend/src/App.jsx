@@ -15,8 +15,6 @@ function App() {
   const { isAuthenticated } = useSelector(
     (state) => state.auth
   );
-  // const { hasProfile } = useSelector((state) => state.profileAuth);
-  // const { hasContacts } = useSelector((state) => state.addMember);  
 
   return (
     <>
