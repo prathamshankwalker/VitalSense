@@ -52,6 +52,9 @@ class ActivityPredictionModel(serializers.Serializer):
     distance = serializers.FloatField(required = True)
     heart_rate = serializers.FloatField(required = True)
 
+class ScrollInputSerializer(serializers.Serializer):
+    value = serializers.IntegerField(required = True)
+
 class UserPersonalDataSerializer(serializers.Serializer):
     height = serializers.FloatField(required = True)
     weight = serializers.FloatField(required = True)

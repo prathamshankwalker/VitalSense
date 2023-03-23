@@ -28,13 +28,13 @@ class send_forgot_link(threading.Thread):
 
 
 class send_notification(threading.Thread):
-    def __init__(self, email, phone, message):
-        self.email = email
-        self.phone = phone
-        self.message = message
-        threading.Thread.__inti__(self)
+    def __init__(self, relatives_list):
+        self.relatives_list = relatives_list
+        threading.Thread.__init__(self)
     def run(self):
         try:
-            pass
+            print("@@@@@@@@@@@@@@@@@")
+            print("SEND NOTFICATIONS")
+            print("@@@@@@@@@@@@@@@@@")
         except Exception as e:
             print(e)
