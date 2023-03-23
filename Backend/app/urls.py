@@ -12,11 +12,13 @@ urlpatterns = [
 	path('forgot/', views.forgot, name="forgot"),
 	path('reset/', views.reset, name="reset"),
     
+	path('add-personal-data/', views.add_personal_data, name="add-personal-data"),
+    
 	# Add Family Members
 	path('get-members/', views.MemberL.as_view(), name="member-L"),
     path('add-member/', views.addMember, name="add-member"),
 	path('member/<id>/', views.MemberRUD.as_view(), name="member-RUD"),
     
 	# Main
-	# path('/', views.reset, name="reset"),
+	path('data-input/', views.data_input, name="data-input"),
 ]

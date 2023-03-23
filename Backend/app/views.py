@@ -7,10 +7,25 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework import status
 from django.core.cache import cache
+from django.conf import settings
 from .serializers import *
 from .threads import *
 from .models import *
+from .utils import *
 
+from twilio.rest import Client
+
+
+account_sid = settings.TWILIO_ACCOUNT_SID
+auth_token = settings.TWILIO_AUTH_TOKEN
+
+twilio_client = Client(account_sid, auth_token)
+
+message = twilio_client.messages.create(
+    from_='whatsapp:+14155238886',
+    body='Hello',
+    to='whatsapp:+918007609672'
+)
 
 
 @api_view(["POST"])
@@ -161,9 +176,38 @@ class MemberRUD(RetrieveUpdateDestroyAPIView):
 
 
 @api_view(["POST"])
-@permission_classes(IsAuthenticated)
-def data_input(request):
+@permission_classes([IsAuthenticated])
+def add_personal_data(request):
     try:
-        pass
+        user = UserModel.objects.get(email=request.user.email)
+        ser = ActivityPredictionModel(data = request.data)
+        if ser.is_valid():
+            user.height = ser.data["height"]
+            user.weight = ser.data["weight"]
+            user.dob = ser.data["dob"]
+            user.gender = ser.data["gender"]
+            user.save()
+            return Response({"message": "User Data Saved"}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def data_input(request):
+    try:
+        user = UserModel.objects.get(email=request.user.email)
+        ser = ActivityPredictionModel(data = request.data)
+        if ser.is_valid():
+            steps = ser.data["steps"]
+            calories = ser.data["calories"]
+            distance = ser.data["distance"]
+            heart_rate = ser.data["heart_rate"]
+            output = predict_activity(user.height, user.weight, steps, calories, distance, heart_rate)
+            return Response({"message": output}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
