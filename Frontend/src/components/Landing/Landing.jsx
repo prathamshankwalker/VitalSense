@@ -1,4 +1,5 @@
 import { createStyles, Container, Text, Button, Group, rem } from '@mantine/core';
+// import {useState,useEffect} from 'react'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -72,6 +73,11 @@ const useStyles = createStyles((theme) => ({
 
 export default function Landing() {
   const { classes } = useStyles();
+  // const [variable,setVariable] = useState(0)
+
+  // useEffect(()=>{
+  //   console.log("Hello worldß")
+  // },[variable])
 
   return (
     <div className={classes.wrapper}>
@@ -89,6 +95,7 @@ export default function Landing() {
             className={classes.control}
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan' }}
+            // onClick={()=>setVariable(variable + 1)}
           >
             let's get started
           </Button>

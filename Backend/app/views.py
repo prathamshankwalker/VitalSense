@@ -13,6 +13,7 @@ from .serializers import *
 from .threads import *
 from .models import *
 from .utils import *
+import random
 
 
 @api_view(["POST"])
@@ -180,28 +181,27 @@ def add_personal_data(request):
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+# @api_view(["POST"])
+# @permission_classes([IsAuthenticated])
+# def data_input(request):
+#     try:
+#         user = UserModel.objects.get(email=request.user.email)
+#         ser = ActivityPredictionModel(data = request.data)
+#         if ser.is_valid():
+#             steps = ser.data["steps"]
+#             calories = ser.data["calories"]
+#             distance = ser.data["distance"]
+#             heart_rate = ser.data["heart_rate"]
+            # output = predict_activity(user.height, user.weight, steps, calories, distance, heart_rate)
+            # return Response({"message": output}, status=status.HTTP_200_OK)
+#         return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+#     except Exception as e:
+#         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def data_input(request):
-    try:
-        user = UserModel.objects.get(email=request.user.email)
-        ser = ActivityPredictionModel(data = request.data)
-        if ser.is_valid():
-            steps = ser.data["steps"]
-            calories = ser.data["calories"]
-            distance = ser.data["distance"]
-            heart_rate = ser.data["heart_rate"]
-            output = predict_activity(user.height, user.weight, steps, calories, distance, heart_rate)
-            return Response({"message": output}, status=status.HTTP_200_OK)
-        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
-    except Exception as e:
-        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def scroll_input(request):
+def ecg_input(request):
     try:
         user = UserModel.objects.get(email=request.user.email)
         ser = ScrollInputSerializer(data = request.data)
@@ -217,27 +217,41 @@ def scroll_input(request):
         return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-# Hypoglycemia
-# 70-140
-# Hyperglycemia
+
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def scroll_input(request):
+def bs_hr_input(request):
     try:
         user = UserModel.objects.get(email=request.user.email)
-        ser = ScrollInputSerializer(data = request.data)
+        ser = BS_HR_Input_Serializer(data = request.data)
         if ser.is_valid():
-            val = ser.data["value"]
-            # if val not in range(0,):
-            #     return Response({"message": "Invalid Range"}, status=status.HTTP_406_NOT_ACCEPTABLE)
-            if val<70:
-                return Response({"message":"Low Blood Pressure, Hypoglycemia"}, status=status.HTTP_200_OK)
-            elif val>=70 and val<=140:
-                return Response({"message":"Normal Blood Pressure"}, status=status.HTTP_200_OK)
+            if int(ser.data["bs"]) > 120 :
+                bs = 1
             else:
-                return Response({"message":"High Blood Pressure, Hyperglycemia"}, status=status.HTTP_200_OK)
+                bs = 0
+            if user.gender == "MALE":
+                out = hypertension_classifier(user.get_age(), 1, ser.data["hr"], bs, 0)
+            else:
+                out = hypertension_classifier(user.get_age(), 0, ser.data["hr"], bs, 0)
+            return Response({"hypertension": out}, status=status.HTTP_200_OK)
         return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def step_cal_dist_input(request):
+    try:
+        user = UserModel.objects.get(email=request.user.email)
+        ser = Step_Cal_Dist_Input_Serializer(data = request.data)
+        if ser.is_valid():
+            heart_rate = random.randint(100, 185)
+            output = predict_activity(user.height, user.weight, ser.data["step"], ser.data["calory"], ser.data["distance"], heart_rate)
+            return Response({"activity": output}, status=status.HTTP_200_OK)
+        return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+

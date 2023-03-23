@@ -60,3 +60,15 @@ class UserPersonalDataSerializer(serializers.Serializer):
     weight = serializers.FloatField(required = True)
     dob = serializers.DateField(required = True)
     gender = serializers.CharField(required = True)
+
+
+class BS_HR_Input_Serializer(serializers.Serializer):
+    bs = serializers.IntegerField(required = True)
+    hr = serializers.IntegerField(required = True)
+
+
+class Step_Cal_Dist_Input_Serializer(serializers.Serializer):
+    step = serializers.IntegerField(required = True)
+    calory = serializers.IntegerField(required = True)
+    distance = serializers.IntegerField(required = True)
+

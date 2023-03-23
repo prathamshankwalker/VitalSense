@@ -20,8 +20,12 @@ urlpatterns = [
 	path('member/<id>/', views.MemberRUD.as_view(), name="member-RUD"),
 
 	# Main
-	path('data-input/', views.data_input, name="data-input"),
-	path('scroll-input/', views.scroll_input, name="scroll-input"),
-	path('blood-pressure-input/', views.scroll_input, name="blood-pressure-input"),
+	# path('data-input/', views.data_input, name="data-input"),
+	# path('blood-pressure-input/', views.bpinp, name="blood-pressure-input"),
+	# path('input/', views.input123, name="input"),
+
+	path('hypertension/', views.bs_hr_input, name="bs-hr-input"),
+	path('ecg-input/', views.ecg_input, name="ecg-input"),
+	path('activity/', views.step_cal_dist_input, name="step-cal-dist-input"),
 
 ]

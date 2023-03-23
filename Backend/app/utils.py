@@ -1,9 +1,9 @@
 from tensorflow.keras.models import load_model
 from django.conf import settings
 import numpy as np
-import pickle
+import pickle, random
 
-activity_classes = ['Lying', 'Running 3 METs', 'Running 5 METs', 'Running 7 METs', 'Self Pace walk', 'Sitting']
+activity_classes = ['Lying', 'Running', 'Running', 'Running', 'Walking', 'Sitting']
 
 ecg_classes = [
     "Non-Ectopic Beats (Normal)", 
@@ -12,6 +12,8 @@ ecg_classes = [
     "Fusion Beats (Abnormal)",
     "Unknown"
 ]
+
+hypertension_classes = ['No Hypertension','Hypertension']
 
 # predicts current activity of the person 
 def predict_activity(height, weight, steps, calories, distance, heart_rate):
@@ -29,4 +31,15 @@ def ecg_classification(arr):
     pred = model.predict(y)
     op = pred.argmax()
     return op, ecg_classes[op]
+
+
+def hypertension_classifier(age,sex,trestbps,fbs,restecg):
+    slope = random.randint(0, 3)
+    ca = random.randint(0, 4)
+    ml_model_pl = pickle.load(open(f"{settings.BASE_DIR}/hypertension.pickle", 'rb'))
+    pred = ml_model_pl.predict([[age,sex,trestbps,fbs,restecg,slope,ca]])
+    if int(pred) == 0:
+        return False
+    return True
+    # return hypertension_classes[int(pred)]
 
