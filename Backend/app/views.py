@@ -14,20 +14,6 @@ from .threads import *
 from .models import *
 from .utils import *
 
-from twilio.rest import Client
-
-
-account_sid = settings.TWILIO_ACCOUNT_SID
-auth_token = settings.TWILIO_AUTH_TOKEN
-
-twilio_client = Client(account_sid, auth_token)
-
-message = twilio_client.messages.create(
-    from_ = 'whatsapp:+14155238886',
-    body = 'Hello',
-    to = 'whatsapp:+918007609672'
-)
-
 
 @api_view(["POST"])
 def google_authentication(request):
