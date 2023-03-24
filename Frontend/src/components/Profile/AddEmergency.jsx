@@ -39,7 +39,7 @@ const AddEmergency = () => {
     );
   };
   
-  const { hasContacts } = useSelector((state) => state.member);
+  // const { hasContacts } = useSelector((state) => state.member);
   // const navigate = useNavigate()
 
   // useEffect(() => {

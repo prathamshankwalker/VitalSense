@@ -17,10 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../state/actions/login";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addUserProfile } from "../../state/actions/profile";
 
 export default function Signup() {
   const dispatch = useDispatch();
+  
   const form = useForm({
     initialValues: {
       name: "",

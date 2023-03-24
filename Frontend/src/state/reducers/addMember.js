@@ -1,16 +1,17 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  hasContacts: false,
+};
 
 export const memberAddReducer = createReducer(initialState, {
   MemberRequest: (state, action) => {
     state.loading = true;
-    state.hasContacts = false;
   },
   MemberSuccess: (state, action) => {
     state.loading = false;
     state.hasContacts = true;
-    state.message = action.payload``;
+    state.message = action.payload;
   },
   MemberError: (state, action) => {
     state.loading = false;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import "../../axios";
+import { authAxios } from "../../axios";
 
 export const addUserProfile =
   (height, weight, dob, gender) => async (dispatch) => {
@@ -7,27 +7,27 @@ export const addUserProfile =
       dispatch({
         type: "ProfileRequest",
       });
-      const { token } = JSON.parse(localStorage.getItem('user'));
-      console.log(token);
-      const { data } = await axios.post(
+
+      const { data } = await authAxios.post(
         "api/add-personal-data/",
         { height, weight, dob, gender },
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
           },
         }
       );
+      console.log(data);
+
       dispatch({
         type: "ProfileSuccess",
         payload: data.message,
       });
     } catch (error) {
-      console.log(error.response.data, error.response.status);
+      // console.log(error.response.status);
       dispatch({
         type: "ProfileFailure",
-        payload: error.response.data.message,
+        payload: error.response.status,
       });
     }
   };

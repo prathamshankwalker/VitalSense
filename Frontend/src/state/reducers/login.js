@@ -17,6 +17,7 @@ export const authReducer = createReducer(initialState, {
     state.error = action.payload;
     state.loading = false;
   },
+  
   LogoutRequest: (state, action) => {
     state.loading = true;
   },
@@ -25,6 +26,7 @@ export const authReducer = createReducer(initialState, {
     state.message = action.payload;
     state.loading = false;
   },
+
   clearError: (state, action) => {
     state.error = null;
   },

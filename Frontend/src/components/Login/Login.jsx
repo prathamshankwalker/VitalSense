@@ -16,17 +16,19 @@ import { useForm } from "@mantine/form";
 import { loginUser } from "../../state/actions/login";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 export default function Login() {
   const disptach = useDispatch();
+
   const form = useForm({
     initialValues: {
       email: "",
       password: "",
     },
   });
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (isAuthenticated === true) {
       navigate("/addprofile");
@@ -36,7 +38,7 @@ export default function Login() {
   const formSubmitHandler = (values, e) => {
     console.log(values);
     e.preventDefault();
-    disptach(loginUser(values.email, Number(values.password)));
+    disptach(loginUser(values.email, values.password));
   };
 
   return (

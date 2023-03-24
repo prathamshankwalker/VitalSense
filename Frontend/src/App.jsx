@@ -12,9 +12,7 @@ import AddProfile from "./components/Profile/AddProfile";
 import AddEmergency from "./components/Profile/AddEmergency";
 
 function App() {
-  const { isAuthenticated } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -22,14 +20,15 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        
         {/* <Route path="/dashboard" element={isAuthenticated ? <Dashboard/>: <Login/>}/> */}
         <Route path="/addprofile" element={<AddProfile />} />
-        <Route path="/addemergency" element={<AddEmergency />}/>
+        <Route path="/addemergency" element={<AddEmergency />} />
         <Route element={<Navbar />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
-        <Route path="*" element={<h1>not found</h1>}/>
+        <Route path="*" element={<h1>not found</h1>} />
       </Routes>
     </>
   );
