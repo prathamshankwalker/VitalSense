@@ -1,3 +1,4 @@
+import { Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 function getRandomInt(min, max) {
@@ -6,7 +7,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-const ValueGenerator = ({ value, updateFunction, min, max }) => {
+const ValueGenerator = ({ value, updateFunction, min, max, interval }) => {
   const [value1, setValue] = useState(null);
   
   useEffect(() => {
@@ -14,11 +15,11 @@ const ValueGenerator = ({ value, updateFunction, min, max }) => {
       let currValue = getRandomInt(min, max);
         updateFunction(currValue);
       setValue(currValue);
-    }, 3000);
+    }, interval);
     
     return () => clearInterval(intervalId);
   }, []);
 
-  return <h1>{value}</h1>;
+  return <Title fz="3rem">{value}</Title>;
 };
 export default ValueGenerator;

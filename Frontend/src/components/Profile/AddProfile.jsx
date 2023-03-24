@@ -38,7 +38,7 @@ const AddProfile = () => {
   useEffect(() => {
     if(hasProfile === true) {
       console.log("Profile udpated!");
-      navigate("/dashboard")
+      navigate("/addemergency")
     }
   }, [hasProfile])
 

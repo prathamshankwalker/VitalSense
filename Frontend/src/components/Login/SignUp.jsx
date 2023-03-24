@@ -34,7 +34,7 @@ export default function Signup() {
 
   useEffect(() => {
     if (isAuthenticated === true) {
-      navigate("/addprofile");
+      navigate("/login");
     }
   }, [isAuthenticated]);
 

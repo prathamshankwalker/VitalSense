@@ -1,16 +1,18 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  issue: ""
+};
 
-export const memberViewReducer = createReducer(initialState, {
-  ViewMemberRequest: (state, action) => {
+export const ecgReducer = createReducer(initialState, {
+  EcgRequest: (state, action) => {
     state.loading = true;
   },
-  ViewMemberSuccess: (state, action) => {
+  EcgSuccess: (state, action) => {
     state.loading = false;
-    state.data = action.payload;
+    state.issue = action.payload;
   },
-  ViewMemberError: (state, action) => {
+  EcgError: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },

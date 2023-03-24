@@ -12,7 +12,6 @@ const myTheme = {
   fontFamily: "Satoshi, sans-serif",
   fontFamilyMonospace: "Satoshi, sans-serif",
   headings: { fontFamily: "Satoshi, sans-serif" },
-  colorScheme: "dark"
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(

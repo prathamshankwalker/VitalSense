@@ -1,23 +1,39 @@
-import { Container, Title, Paper, Text, Center, Group } from "@mantine/core";
+import {
+  Container,
+  Title,
+  Paper,
+  Text,
+  Center,
+  Group,
+  ColorSwatch,
+} from "@mantine/core";
 import Navbar from "../Navbar";
 import styles from "./dashboard.module.css";
 import ValueGenerator from "./ValueGen";
 import { useEffect, useState } from "react";
 import Status from "./Status";
 import { IconActivityHeartbeat } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
+import { getHypertensionData } from "../../state/actions/hypertension";
+import EcgStepper from "./EchStepper";
 
 const Dashboard = () => {
-  const [heartRate, setHeartRate] = useState(null);
-  const [glucose, setGlucose] = useState(null);
+  const [heartRate, setHeartRate] = useState(70);
+  const [glucose, setGlucose] = useState(0);
+  const dispatch = useDispatch();
+
+  const { loading, isHypertension } = useSelector(
+    (state) => state.hypertension
+  );
 
   useEffect(() => {
-    console.log("hypertension");
+    dispatch(getHypertensionData(glucose, heartRate));
   }, [heartRate, glucose]);
 
   return (
     <>
       <Container size="xl">
-        <Title>Hi, John Doe</Title>
+        <Title color="#fff">Hi, John Doe</Title>
 
         {/* current status */}
         <Title order={3} mt="xl">
@@ -31,15 +47,11 @@ const Dashboard = () => {
         <Group>
           {/* glucose */}
           <Paper
+            radius="lg"
             my="md"
             shadow="sm"
             p="md"
-            className={styles.currentVitals}
-            sx={(theme) => ({
-              background: `${
-                glucose > 140 ? theme.colors.red[3] : theme.colors.green[3]
-              }`,
-            })}
+            className={styles.currentCard}
           >
             <Text sx={{ textTransform: "uppercase", fontWeight: 800 }}>
               blood glucose
@@ -51,20 +63,20 @@ const Dashboard = () => {
               }}
               min={70}
               max={200}
+              interval={20000}
+            />
+            <ColorSwatch
+              color={glucose > 140 || glucose < 70 ? "red" : "green"}
             />
           </Paper>
-          
+
           {/* heartrate */}
           <Paper
+            radius="lg"
             my="md"
             shadow="sm"
             p="md"
-            className={styles.currentVitals}
-            sx={(theme) => ({
-              background: `${
-                heartRate > 140 ? theme.colors.red[3] : theme.colors.green[3]
-              }`,
-            })}
+            className={styles.currentCard}
           >
             <Text sx={{ textTransform: "uppercase", fontWeight: 800 }}>
               heart rate
@@ -76,20 +88,39 @@ const Dashboard = () => {
               }}
               min={50}
               max={100}
+              interval={4000}
+            />
+            <ColorSwatch
+              color={heartRate > 140 || heartRate < 70 ? "red" : "green"}
             />
           </Paper>
 
-              {/* hypertension */}
-          <Paper my="md" shadow="sm" p="md" className={styles.currentVitals}>
+          {/* hypertension */}
+          <Paper
+            radius="lg"
+            my="md"
+            shadow="sm"
+            p="md"
+            className={styles.currentCard}
+          >
             <Text>Current Hypertension State</Text>
             <Text sx={{ textTransform: "uppercase", fontWeight: 800 }}>
-              danger
+              {isHypertension ? "danger" : "safe"}
             </Text>
             <Center my="md">
-              <IconActivityHeartbeat />
+              <IconActivityHeartbeat size={40} />
             </Center>
+            <ColorSwatch
+              color={isHypertension > 140 || isHypertension < 70 ? "red" : "green"}
+            />
           </Paper>
         </Group>
+        <Paper sx={{ width: "250px" }}>
+          <Title order={3} my="md">
+            ECG Data
+          </Title>
+          <EcgStepper />
+        </Paper>
       </Container>
     </>
   );

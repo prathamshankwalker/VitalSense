@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -13,14 +13,14 @@ import AddEmergency from "./components/Profile/AddEmergency";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
-
+ 
   return (
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        
+
         {/* <Route path="/dashboard" element={isAuthenticated ? <Dashboard/>: <Login/>}/> */}
         <Route path="/addprofile" element={<AddProfile />} />
         <Route path="/addemergency" element={<AddEmergency />} />

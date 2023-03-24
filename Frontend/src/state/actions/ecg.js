@@ -1,16 +1,15 @@
 import { authAxios } from "../../axios";
 
 export const addEmergencyMember =
-  (name, phone, email, relation = null) =>
-  async (dispatch) => {
+  (value, longitude, latitude) => async (dispatch) => {
     try {
       dispatch({
-        type: "MemberRequest",
+        type: "EcgRequest",
       });
 
       const { data } = await authAxios.post(
-        "api/add-member/",
-        { name, phone, email, relation },
+        "api/ecg-input/",
+        { value, latitude, longitude },
         {
           headers: {
             "Content-Type": "application/json",
@@ -19,15 +18,14 @@ export const addEmergencyMember =
       );
       console.log(data);
       dispatch({
-        type: "MemberSuccess",
+        type: "EcgSuccess",
         payload: data.message,
       });
       console.log(data);
-      
     } catch (error) {
       dispatch({
-        type: "MemberError",
-        payload: "Members not saved",
+        type: "EcgError",
+        payload: error.response.data,
       });
     }
   };

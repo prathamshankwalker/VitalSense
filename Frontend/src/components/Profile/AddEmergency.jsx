@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddEmergency = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const form = useForm({
     initialValues: {
@@ -39,12 +40,12 @@ const AddEmergency = () => {
     );
   };
   
-  // const { hasContacts } = useSelector((state) => state.member);
-  // const navigate = useNavigate()
+  const { hasContacts } = useSelector((state) => state.member);
 
-  // useEffect(() => {
-  //   navigate("/dashboard");
-  // }, [hasContacts]);
+  useEffect(() => {
+    if(hasContacts === true)
+    navigate("/dashboard");
+  }, [hasContacts]);
 
   return (
     <Container size="lg">
