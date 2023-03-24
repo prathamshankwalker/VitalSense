@@ -70,7 +70,11 @@ To run this project, you will need to add the following environment variables to
 
 - `GOOGLE_CLIENT_SECRET`  -  Google Client Secret
 
-![ENV file](docs/env.png)
+- `TWILIO_ACCOUNT_SID`  -  Twilio Account SID
+
+- `TWILIO_AUTH_TOKEN`  -  Twilio Auth Token
+
+<!-- ![ENV file](docs/env.png) -->
 
 
 ### 💻 Run Locally
@@ -78,12 +82,12 @@ To run this project, you will need to add the following environment variables to
 ***Step#1 : Clone Project Repository***
 
 ```bash
-git clone https://github.com/prathamshankwalker/sj-innovations-hackathon.git
+git clone https://github.com/Intensa-Council-GEC/Team-Delta.git
 ```
 ***Step#2 : Go to Project Directory***
 
 ```bash
-cd sj-innovations-hackathon
+cd Team-Delta
 ```
 
 ***Step#3 : Run Backend Server***
@@ -91,47 +95,6 @@ cd sj-innovations-hackathon
 ```bash
 cd backend
 ```
-- Install Dependencies
-```bash
-npm install
-```
-
-- add *".env"* file
-    - **In Windows :**
-    ```bash
-        copy .env.example .env
-    ```
-    - **In Linux or MacOS :**
-    ```bash
-        cp .env.example .env
-    ```
-- Enter Your Credentials in the *".env"* file. Refer [Environment Variables](#-environment-variables)
-
-- Runserver
-```bash
-npm test
-```
-
-***Step#4 : Run Backend Server***
-
-```bash
-cd frontend
-```
-- Install Dependencies
-```bash
-npm install
-```
-- Runserver
-```bash
-npm run dev
-```
-
-***Step#5 : Run ML Server***
-
-```bash
-cd machine-learning
-```
-
 - If *virtualenv* is not istalled :
 ```bash
 pip install virtualenv && virtualenv env
@@ -160,11 +123,25 @@ pip install --upgrade pip -r requirements.txt
 python manage.py runserver
 ```
 
+***Step#4 : Run Frontend Server***
+
+```bash
+cd frontend
+```
+- Install Dependencies
+```bash
+npm install
+```
+- Runserver
+```bash
+npm run dev
+```
+
 *Check the terminal if any error.*
 
 ***Step#6 : Open Browser***
 
-- Open `http://127.0.0.1:8000/` or `http://localhost:8000/` on your browser.
+- Open `http://127.0.0.1:5173/` or `http://localhost:5173/` on your browser.
 
 
 ### 📄 Documentation
