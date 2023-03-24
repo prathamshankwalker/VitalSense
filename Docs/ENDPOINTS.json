@@ -1,0 +1,457 @@
+{
+	"info": {
+		"_postman_id": "f74c4f03-13d8-4975-a569-81b3286b881a",
+		"name": "Techfluence Hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25119294"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Google Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token_id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/google-auth/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"google-auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"patharv777@gmail.com\",\n    \"password\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/login/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Atharv\", \n    \"email\": \"patharv777@gmail.com\",\n    \"password\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/signup/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"signup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"patharv777@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/forgot/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"forgot",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"otp\": 123,\n    \"pw\": 123\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/reset/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"reset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Personal Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"height\": 168,\n    \"weight\": 65.4,\n    \"dob\": \"2023-02-23\",\n    \"gender\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/add-personal-data/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"add-personal-data",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Family",
+			"item": [
+				{
+					"name": "View Members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURl}}api/get-members/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"get-members",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Member",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pratham\",\n    \"phone\": 9307051204,\n    \"email\": \"pshankwalker1@gmail.com\",\n    \"relation\": \"Friend\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/add-member/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"add-member",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Member Details",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Abhinav\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/member/{{Member ID}}/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"member",
+								"{{Member ID}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Member",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/member/{{Member ID}}/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"member",
+								"{{Member ID}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Main",
+			"item": [
+				{
+					"name": "Hypertention - BP HR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bs\": 150,\n    \"hr\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/hypertension/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"hypertension",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ECG Data Input",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": 3,\n    \"lattitude\": 15.532,\n    \"longitude\": 12.847\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.161:8000/api/ecg-input/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"161"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"ecg-input",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activity - Step Calory Distance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{BearerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"step\": 10,\n    \"calory\": 1,\n    \"distance\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURl}}api/activity/",
+							"host": [
+								"{{BaseURl}}api"
+							],
+							"path": [
+								"activity",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURl",
+			"value": "http://192.168.0.161:8000/"
+		},
+		{
+			"key": "Member ID",
+			"value": "dc33b61f-a8c4-4a16-98fe-d6c574ce9aa1"
+		},
+		{
+			"key": "BearerToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5NTkyNjIyLCJpYXQiOjE2Nzk1ODU0MjIsImp0aSI6ImUzMGRjNWNiODRkYTRlZjI5ZTgzZjc3NmFiOTRmNzM3IiwidXNlcl9pZCI6IjZlYzhkOGRlLTljMjctNGQxMi1hN2ZhLWQ3Yzk3N2Y3MzE2YSJ9.lHW3ROl7Dtj3-9LDqRLfdt82PbjRKHxqrX8fYKB7tcM"
+		}
+	]
+}
