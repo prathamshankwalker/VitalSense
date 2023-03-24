@@ -128,11 +128,16 @@ def reset(request):
 ########################################################################################################################################################
 
 
-class MemberL(ListAPIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    queryset = FamilyMemberModel.objects.all()
-    serializer_class = FamilyMemberSerializer
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def members_list_view(request):
+    try:
+        user = UserModel.objects.get(email=request.user.email)
+        ser = FamilyMemberSerializer(user.family_member.all(), many=True)
+        return Response(ser.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 @api_view(["POST"])
@@ -181,24 +186,6 @@ def add_personal_data(request):
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# @api_view(["POST"])
-# @permission_classes([IsAuthenticated])
-# def data_input(request):
-#     try:
-#         user = UserModel.objects.get(email=request.user.email)
-#         ser = ActivityPredictionModel(data = request.data)
-#         if ser.is_valid():
-#             steps = ser.data["steps"]
-#             calories = ser.data["calories"]
-#             distance = ser.data["distance"]
-#             heart_rate = ser.data["heart_rate"]
-            # output = predict_activity(user.height, user.weight, steps, calories, distance, heart_rate)
-            # return Response({"message": output}, status=status.HTTP_200_OK)
-#         return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)
-#     except Exception as e:
-#         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def ecg_input(request):
@@ -211,7 +198,7 @@ def ecg_input(request):
                 return Response({"message": "Invalid Range"}, status=status.HTTP_406_NOT_ACCEPTABLE)
             output, text = ecg_classification(bada_data[val])
             if output == 2:
-                thread_obj = send_notification(user.family_member.all())
+                thread_obj = send_notification(user.family_member.all(), ser.data["lattitude"], ser.data["longitude"])
                 thread_obj.start()
             return Response({"message": text}, status=status.HTTP_200_OK)
         return Response({"error":ser.errors}, status=status.HTTP_400_BAD_REQUEST)

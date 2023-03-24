@@ -1,0 +1,6 @@
+FROM node:alpine
+WORKDIR /app/frontend
+ADD . /app/frontend
+RUN npm install --legacy-peer-deps
+EXPOSE 5173
+CMD npm run dev

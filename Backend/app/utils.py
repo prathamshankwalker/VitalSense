@@ -3,7 +3,12 @@ from django.conf import settings
 import numpy as np
 import pickle, random
 
+
+# Output Prediction Classes
+
 activity_classes = ['Lying', 'Running', 'Running', 'Running', 'Walking', 'Sitting']
+
+hypertension_classes = ['No Hypertension','Hypertension']
 
 ecg_classes = [
     "Non-Ectopic Beats (Normal)", 
@@ -13,7 +18,6 @@ ecg_classes = [
     "Unknown"
 ]
 
-hypertension_classes = ['No Hypertension','Hypertension']
 
 # predicts current activity of the person 
 def predict_activity(height, weight, steps, calories, distance, heart_rate):

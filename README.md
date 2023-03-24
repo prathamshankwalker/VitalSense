@@ -20,11 +20,11 @@ How can we utilize wearable devices and sensors to monitor health indicators lik
 
 ### 👨‍👦‍👦 Team
 
-- `Atharva Parkhe` -  *Python* -   [LinkedIn](https://www.linkedin.com/in/atharva-parkhe-3283b2202/), [GitHub](https://github.com/atharvparkhe) - Backend Developer
+- `Atharva Parkhe` -  *Python* -   [LinkedIn](https://www.linkedin.com/in/atharva-parkhe-3283b2202/), [GitHub](https://github.com/atharvparkhe), [Instagram](https://www.instagram.com/atharvparkhe/) - Backend Developer
 
-- `Madem Greeshma` -  *JavaScript* - [LinkedIn](https://www.linkedin.com/in/m-greeshma/), [GitHub](https://github.com/Greeshma2903)  -  Frontend Developer
+- `Madem Greeshma` -  *JavaScript* - [LinkedIn](https://www.linkedin.com/in/m-greeshma/), [GitHub](https://github.com/Greeshma2903), [Instagram](https://www.instagram.com/prathamshankwalker/)  -  Frontend Developer
 
-- `Pratham Shankhwalker` -  *Python* - [LinkedIn](https://www.linkedin.com/in/pratham-shankwalker-ab2899205/), [GitHub](https://github.com/prathamshankwalker)  -  Machine Learning (ML) Developer
+- `Pratham Shankhwalker` -  *Python* - [LinkedIn](https://www.linkedin.com/in/pratham-shankwalker-ab2899205/), [GitHub](https://github.com/prathamshankwalker), [Instagram](https://www.instagram.com/prathamshankwalker/)  -  Machine Learning (ML) Developer
 
 
 ### 📋 Features
