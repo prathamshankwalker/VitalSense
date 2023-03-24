@@ -54,6 +54,8 @@ class ActivityPredictionModel(serializers.Serializer):
 
 class ScrollInputSerializer(serializers.Serializer):
     value = serializers.IntegerField(required = True)
+    lattitude = serializers.CharField(required = True)
+    longitude = serializers.CharField(required = True)
 
 class UserPersonalDataSerializer(serializers.Serializer):
     height = serializers.FloatField(required = True)

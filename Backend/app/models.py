@@ -3,6 +3,7 @@ import datetime
 
 GENDER = (("MALE","MALE"),("FEMALE","FEMALE"))
 
+
 class UserModel(BaseUser):
     height = models.FloatField(null=True, blank=True)
     weight = models.FloatField(null=True, blank=True)

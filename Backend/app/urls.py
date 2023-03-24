@@ -15,15 +15,11 @@ urlpatterns = [
 	path('add-personal-data/', views.add_personal_data, name="add-personal-data"),
 
 	# Add Family Members
-	path('get-members/', views.MemberL.as_view(), name="member-L"),
+	path('get-members/', views.members_list_view, name="member-L"),
     path('add-member/', views.addMember, name="add-member"),
 	path('member/<id>/', views.MemberRUD.as_view(), name="member-RUD"),
 
 	# Main
-	# path('data-input/', views.data_input, name="data-input"),
-	# path('blood-pressure-input/', views.bpinp, name="blood-pressure-input"),
-	# path('input/', views.input123, name="input"),
-
 	path('hypertension/', views.bs_hr_input, name="bs-hr-input"),
 	path('ecg-input/', views.ecg_input, name="ecg-input"),
 	path('activity/', views.step_cal_dist_input, name="step-cal-dist-input"),
