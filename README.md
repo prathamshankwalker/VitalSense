@@ -146,4 +146,4 @@ npm run dev
 
 ### 📄 Documentation
 
-The docs folder contain all the project documentations and screenshots of the project.You can go through the presentation [here](docs/project-report.pdf)
+[DOC](Docs/project-report.pdf)
